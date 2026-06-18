@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <h5>Identitas Santri</h5>
+            <div class="mb-3">
+                <label>Nama Santri</label>
+                <input type="text" name="nama" class="form-control" value="{{ santri.nama if santri else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>NIS</label>
+                <input type="text" name="nis" class="form-control" value="{{ santri.nis if santri else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Kelas / Halaqah</label>
+                <input type="text" name="kelas" class="form-control" value="{{ santri.kelas if santri else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Asrama</label>
+                <input type="text" name="asrama" class="form-control" value="{{ santri.asrama if santri else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Bulan</label>
+                <input type="text" name="bulan" class="form-control" value="{{ santri.bulan if santri else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Tahun</label>
+                <input type="text" name="tahun" class="form-control" value="{{ santri.tahun if santri else '' }}" required>
+            </div>
+            <div class="mb-3">
+                <label>Tanggal Laporan</label>
+                <input type="date" name="tanggal" class="form-control" value="{{ santri.tanggal if santri else '' }}" required>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h5>Absensi Madrasah Diniyah</h5>
+            <div class="row">
+                <div class="col-3"><label>Hadir</label><input type="number" name="md_hadir" class="form-control" value="{{ santri.md_hadir if santri else 0 }}"></div>
+                <div class="col-3"><label>Izin</label><input type="number" name="md_izin" class="form-control" value="{{ santri.md_izin if santri else 0 }}"></div>
+                <div class="col-3"><label>Sakit</label><input type="number" name="md_sakit" class="form-control" value="{{ santri.md_sakit if santri else 0 }}"></div>
+                <div class="col-3"><label>Alpa</label><input type="number" name="md_alpa" class="form-control" value="{{ santri.md_alpa if santri else 0 }}"></div>
+            </div>
+            <div class="mb-3"><label>Total Hari Efektif</label><input type="number" name="md_total" class="form-control" value="{{ santri.md_total if santri else 0 }}"></div>
+
+            <h5>Absensi Madrasah Hifzhil Qur'an</h5>
+            <div class="row">
+                <div class="col-3"><label>Hadir</label><input type="number" name="hf_hadir" class="form-control" value="{{ santri.hf_hadir if santri else 0 }}"></div>
+                <div class="col-3"><label>Izin</label><input type="number" name="hf_izin" class="form-control" value="{{ santri.hf_izin if santri else 0 }}"></div>
+                <div class="col-3"><label>Sakit</label><input type="number" name="hf_sakit" class="form-control" value="{{ santri.hf_sakit if santri else 0 }}"></div>
+                <div class="col-3"><label>Alpa</label><input type="number" name="hf_alpa" class="form-control" value="{{ santri.hf_alpa if santri else 0 }}"></div>
+            </div>
+            <div class="mb-3"><label>Total Hari Efektif</label><input type="number" name="hf_total" class="form-control" value="{{ santri.hf_total if santri else 0 }}"></div>
+
+            <h5>Absensi Sekolah Formal</h5>
+            <div class="row">
+                <div class="col-3"><label>Hadir</label><input type="number" name="fm_hadir" class="form-control" value="{{ santri.fm_hadir if santri else 0 }}"></div>
+                <div class="col-3"><label>Izin</label><input type="number" name="fm_izin" class="form-control" value="{{ santri.fm_izin if santri else 0 }}"></div>
+                <div class="col-3"><label>Sakit</label><input type="number" name="fm_sakit" class="form-control" value="{{ santri.fm_sakit if santri else 0 }}"></div>
+                <div class="col-3"><label>Alpa</label><input type="number" name="fm_alpa" class="form-control" value="{{ santri.fm_alpa if santri else 0 }}"></div>
+            </div>
+            <div class="mb-3"><label>Total Hari Efektif</label><input type="number" name="fm_total" class="form-control" value="{{ santri.fm_total if santri else 0 }}"></div>
+        </div>
+    </div>
+
+    <h5 class="mt-4">Penilaian Kepribadian dan Akhlak</h5>
+    <div class="row">
+        <div class="col-md-3"><label>Adab kepada Guru & Pengasuh</label>
+            <select name="adab_guru" class="form-select">
+                <option value="SB" {% if santri and santri.adab_guru=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.adab_guru=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.adab_guru=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.adab_guru=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+        <div class="col-md-3"><label>Adab kepada Sesama Santri</label>
+            <select name="adab_sesama" class="form-select">
+                <option value="SB" {% if santri and santri.adab_sesama=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.adab_sesama=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.adab_sesama=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.adab_sesama=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+        <div class="col-md-3"><label>Kedisiplinan</label>
+            <select name="kedisiplinan" class="form-select">
+                <option value="SB" {% if santri and santri.kedisiplinan=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.kedisiplinan=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.kedisiplinan=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.kedisiplinan=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+        <div class="col-md-3"><label>Kerapian & Kebersihan</label>
+            <select name="kerapian" class="form-select">
+                <option value="SB" {% if santri and santri.kerapian=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.kerapian=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.kerapian=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.kerapian=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-3"><label>Tanggung Jawab</label>
+            <select name="tanggung_jawab" class="form-select">
+                <option value="SB" {% if santri and santri.tanggung_jawab=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.tanggung_jawab=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.tanggung_jawab=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.tanggung_jawab=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+        <div class="col-md-3"><label>Kejujuran</label>
+            <select name="kejujuran" class="form-select">
+                <option value="SB" {% if santri and santri.kejujuran=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.kejujuran=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.kejujuran=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.kejujuran=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+        <div class="col-md-3"><label>Kemandirian</label>
+            <select name="kemandirian" class="form-select">
+                <option value="SB" {% if santri and santri.kemandirian=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.kemandirian=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.kemandirian=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.kemandirian=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+        <div class="col-md-3"><label>Kepatuhan Tata Tertib</label>
+            <select name="kepatuhan" class="form-select">
+                <option value="SB" {% if santri and santri.kepatuhan=='SB' %}selected{% endif %}>SB</option>
+                <option value="B" {% if santri and santri.kepatuhan=='B' %}selected{% endif %}>B</option>
+                <option value="C" {% if santri and santri.kepatuhan=='C' %}selected{% endif %}>C</option>
+                <option value="K" {% if santri and santri.kepatuhan=='K' %}selected{% endif %}>K</option>
+            </select>
+        </div>
+    </div>
+
+    <h5 class="mt-4">Catatan Pembina</h5>
+    <textarea name="catatan_pembina" class="form-control" rows="3">{{ santri.catatan_pembina if santri else '' }}</textarea>
+
+    <h5 class="mt-4">Rekomendasi / Tindak Lanjut</h5>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="pembinaan_khusus" {% if santri and santri.pembinaan_khusus %}checked{% endif %}>
+        <label>Pembinaan Khusus</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="pendampingan_intensif" {% if santri and santri.pendampingan_intensif %}checked{% endif %}>
+        <label>Pendampingan Intensif</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="monitoring_lanjutan" {% if santri and santri.monitoring_lanjutan %}checked{% endif %}>
+        <label>Monitoring Lanjutan</label>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" name="apresiasi" {% if santri and santri.apresiasi %}checked{% endif %}>
+        <label>Apresiasi / Penghargaan</label>
+    </div>
+    <div class="mb-3">
+        <label>Keterangan Tambahan</label>
+        <textarea name="keterangan_tambahan" class="form-control" rows="2">{{ santri.keterangan_tambahan if santri else '' }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Simpan</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Batal</a>
+</form>
+{% endblock %}

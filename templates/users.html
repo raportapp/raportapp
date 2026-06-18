@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Kelola Akun Guru{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Daftar Akun Guru</h2>
+    <a href="{{ url_for('user_tambah') }}" class="btn btn-primary">+ Tambah Akun</a>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th><th>Username</th><th>Nama Lengkap</th><th>Role</th><th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for u in users %}
+        <tr>
+            <td>{{ u.id }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.nama_lengkap }}</td>
+            <td>{{ u.role }}</td>
+            <td>
+                <a href="{{ url_for('user_edit', id=u.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                {% if u.id != current_user.id %}
+                    <a href="{{ url_for('user_hapus', id=u.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus akun ini?')">Hapus</a>
+                {% else %}
+                    <span class="badge bg-secondary">Akun sendiri</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+{% endblock %}

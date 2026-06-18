@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Daftar Santri{% endblock %}
+{% block content %}
+<h1 class="mb-4">Daftar Santri</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th><th>Nama</th><th>NIS</th><th>Kelas</th><th>Asrama</th><th>Bulan/Tahun</th><th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in santri_list %}
+        <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.nama }}</td>
+            <td>{{ s.nis }}</td>
+            <td>{{ s.kelas }}</td>
+            <td>{{ s.asrama }}</td>
+            <td>{{ s.bulan }}/{{ s.tahun }}</td>
+            <td>
+                <a href="{{ url_for('raport', id=s.id) }}" class="btn btn-sm btn-primary">Lihat Raport</a>
+                <a href="{{ url_for('edit', id=s.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{{ url_for('hapus', id=s.id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Yakin hapus?')">Hapus</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="7" class="text-center">Belum ada data.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Raport {{ s.nama }}{% endblock %}
+{% block content %}
+<div class="card" id="raport-card">
+    <div class="card-body">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">RAPORT BULANAN SANTRI</h2>
+            <h4>PPTQ AL-HUSNA BUKIT RAJA WALI</h4>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Nama Santri</strong> : {{ s.nama }}</p>
+                <p><strong>NIS</strong> : {{ s.nis }}</p>
+                <p><strong>Kelas / Halaqah</strong> : {{ s.kelas }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Asrama</strong> : {{ s.asrama }}</p>
+                <p><strong>Bulan / Tahun</strong> : {{ s.bulan }}/{{ s.tahun }}</p>
+            </div>
+        </div>
+
+        <h5 class="mt-4">Rekap Absensi Santri</h5>
+        <h6>1. Absensi Madrasah Diniyah</h6>
+        <table class="table table-bordered table-sm">
+            <tr><th>KEHADIRAN</th><th>JUMLAH</th></tr>
+            <tr><td>Hadir</td><td>{{ s.md_hadir }}</td></tr>
+            <tr><td>Izin</td><td>{{ s.md_izin }}</td></tr>
+            <tr><td>Sakit</td><td>{{ s.md_sakit }}</td></tr>
+            <tr><td>Alpa</td><td>{{ s.md_alpa }}</td></tr>
+            <tr><td>Total Hari Efektif</td><td>{{ s.md_total }}</td></tr>
+        </table>
+
+        <h6>2. Absensi Madrasah Hifzhil Qur'an</h6>
+        <table class="table table-bordered table-sm">
+            <tr><th>KEHADIRAN</th><th>JUMLAH</th></tr>
+            <tr><td>Hadir</td><td>{{ s.hf_hadir }}</td></tr>
+            <tr><td>Izin</td><td>{{ s.hf_izin }}</td></tr>
+            <tr><td>Sakit</td><td>{{ s.hf_sakit }}</td></tr>
+            <tr><td>Alpa</td><td>{{ s.hf_alpa }}</td></tr>
+            <tr><td>Total Hari Efektif</td><td>{{ s.hf_total }}</td></tr>
+        </table>
+
+        <h6>3. Absensi Sekolah Formal</h6>
+        <table class="table table-bordered table-sm">
+            <tr><th>KEHADIRAN</th><th>JUMLAH</th></tr>
+            <tr><td>Hadir</td><td>{{ s.fm_hadir }}</td></tr>
+            <tr><td>Izin</td><td>{{ s.fm_izin }}</td></tr>
+            <tr><td>Sakit</td><td>{{ s.fm_sakit }}</td></tr>
+            <tr><td>Alpa</td><td>{{ s.fm_alpa }}</td></tr>
+            <tr><td>Total Hari Efektif</td><td>{{ s.fm_total }}</td></tr>
+        </table>
+
+        <h5 class="mt-4">Penilaian Kepribadian dan Akhlak Santri</h5>
+        <table class="table table-bordered">
+            <tr><th>ASPEK YANG DINILAI</th><th>KETERANGAN / NILAI</th></tr>
+            <tr><td>Adab kepada Guru & Pengasuh</td><td>{{ s.adab_guru }}</td></tr>
+            <tr><td>Adab kepada Sesama Santri</td><td>{{ s.adab_sesama }}</td></tr>
+            <tr><td>Kedisiplinan</td><td>{{ s.kedisiplinan }}</td></tr>
+            <tr><td>Kerapian & Kebersihan</td><td>{{ s.kerapian }}</td></tr>
+            <tr><td>Tanggung Jawab</td><td>{{ s.tanggung_jawab }}</td></tr>
+            <tr><td>Kejujuran</td><td>{{ s.kejujuran }}</td></tr>
+            <tr><td>Kemandirian</td><td>{{ s.kemandirian }}</td></tr>
+            <tr><td>Kepatuhan terhadap Tata Tertib</td><td>{{ s.kepatuhan }}</td></tr>
+        </table>
+        <p><small>Skala: SB (Sangat Baik), B (Baik), C (Cukup), K (Kurang)</small></p>
+
+        <h5 class="mt-4">Catatan Pembina</h5>
+        <p>{{ s.catatan_pembina }}</p>
+
+        <h5 class="mt-4">Rekomendasi / Tindak Lanjut</h5>
+        <ul>
+            {% if s.pembinaan_khusus %}<li>Pembinaan Khusus</li>{% endif %}
+            {% if s.pendampingan_intensif %}<li>Pendampingan Intensif</li>{% endif %}
+            {% if s.monitoring_lanjutan %}<li>Monitoring Lanjutan</li>{% endif %}
+            {% if s.apresiasi %}<li>Apresiasi / Penghargaan</li>{% endif %}
+        </ul>
+        <p><strong>Keterangan:</strong> {{ s.keterangan_tambahan }}</p>
+
+        <div class="row mt-5">
+            <div class="col-6">
+                <p>Pringsewu, {{ s.tanggal }}</p>
+                <p>Wali Santri</p>
+                <br><br>
+                <p>___________________________</p>
+            </div>
+            <div class="col-6 text-end">
+                <p>Ustadz/Ustadzah Pembina</p>
+                <br><br>
+                <p>___________________________</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-3">
+    <button onclick="window.print()" class="btn btn-success">Cetak / PDF</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+</div>
+{% endblock %}

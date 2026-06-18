@@ -1,0 +1,40 @@
+/* tampilan layar */
+body {
+    background: #f8f9fa;
+}
+.navbar {
+    margin-bottom: 20px;
+}
+.card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+/* print style */
+@media print {
+    body {
+        background: white !important;
+        margin: 0.5in;
+    }
+    .navbar, .btn, .alert, .no-print {
+        display: none !important;
+    }
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .card-body {
+        padding: 0 !important;
+    }
+    table {
+        font-size: 12px;
+    }
+    h2, h4, h5 {
+        page-break-after: avoid;
+    }
+    .table-bordered {
+        border: 1px solid #000;
+    }
+    .table-bordered th, .table-bordered td {
+        border: 1px solid #000;
+    }
+}
